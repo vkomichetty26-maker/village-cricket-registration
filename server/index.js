@@ -21,7 +21,7 @@ mongoose.connect(process.env.MONGODB_URI)
 // Get all players
 app.get('/api/players', async (req, res) => {
   try {
-    const players = await Player.find().sort({ registeredAt: -1 });
+    const players = await Player.find().sort({ registeredAt: -1 }).allowDiskUse(true);
     // Transform _id to id for frontend compatibility
     const formattedPlayers = players.map(p => {
       const obj = p.toObject();
